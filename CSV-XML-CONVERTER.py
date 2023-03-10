@@ -2,21 +2,21 @@ import csv
 import xml.etree.ElementTree as ET
 
 def csv_to_xml(csv_file, xml_file):
-    # Ouvrir le fichier CSV
+    # Open CSV File
     with open(csv_file, 'r') as file:
         # Utiliser DictReader pour lire les données CSV
         reader = csv.DictReader(file)
 
-        # Configurer l'arbre XML
+        # Configure XML 
         root = ET.Element('root')
         for row in reader:
-            # Ajouter une nouvelle entrée pour chaque ligne du fichier CSV
+            # Add new entry for every lines of the CSV file
             entry = ET.SubElement(root, 'entry')
             for key, value in row.items():
-                # Ajouter un élément pour chaque colonne dans la ligne CSV
+                # Add element for every column one the CSV lines 
                 ET.SubElement(entry, key).text = value
 
-        # Écrire l'arbre XML dans un fichier
+        # Write in XML on the output file
         tree = ET.ElementTree(root)
         tree.write(xml_file)
 
